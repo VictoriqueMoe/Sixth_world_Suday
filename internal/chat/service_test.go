@@ -266,10 +266,10 @@ func TestListUserGroupRooms_DefaultsAndRoleReset(t *testing.T) {
 	// given
 	svc, m := newTestService(t)
 	userID := uuid.New()
-	m.chatRepo.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "tag", "", false, 20, 0).Return(nil, 0, nil)
+	m.chatRepo.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "tag", "", 20, 0).Return(nil, 0, nil)
 
 	// when
-	_, err := svc.ListUserGroupRooms(context.Background(), userID, "", false, "  Tag  ", "bogus", false, -1, -1)
+	_, err := svc.ListUserGroupRooms(context.Background(), userID, "", false, "  Tag  ", "bogus", -1, -1)
 
 	// then
 	require.NoError(t, err)
@@ -279,10 +279,10 @@ func TestListUserGroupRooms_ValidRoleHost(t *testing.T) {
 	// given
 	svc, m := newTestService(t)
 	userID := uuid.New()
-	m.chatRepo.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "", "host", false, 100, 0).Return(nil, 0, nil)
+	m.chatRepo.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "", "host", 100, 0).Return(nil, 0, nil)
 
 	// when
-	_, err := svc.ListUserGroupRooms(context.Background(), userID, "", false, "", "host", false, 500, 0)
+	_, err := svc.ListUserGroupRooms(context.Background(), userID, "", false, "", "host", 500, 0)
 
 	// then
 	require.NoError(t, err)
@@ -292,10 +292,10 @@ func TestListUserGroupRooms_ValidRoleMember(t *testing.T) {
 	// given
 	svc, m := newTestService(t)
 	userID := uuid.New()
-	m.chatRepo.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "", "member", false, 10, 5).Return(nil, 0, nil)
+	m.chatRepo.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "", "member", 10, 5).Return(nil, 0, nil)
 
 	// when
-	_, err := svc.ListUserGroupRooms(context.Background(), userID, "", false, "", "member", false, 10, 5)
+	_, err := svc.ListUserGroupRooms(context.Background(), userID, "", false, "", "member", 10, 5)
 
 	// then
 	require.NoError(t, err)
@@ -305,10 +305,10 @@ func TestListUserGroupRooms_RepoError(t *testing.T) {
 	// given
 	svc, m := newTestService(t)
 	userID := uuid.New()
-	m.chatRepo.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "", "", false, 20, 0).Return(nil, 0, errors.New("boom"))
+	m.chatRepo.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "", "", 20, 0).Return(nil, 0, errors.New("boom"))
 
 	// when
-	_, err := svc.ListUserGroupRooms(context.Background(), userID, "", false, "", "", false, 0, 0)
+	_, err := svc.ListUserGroupRooms(context.Background(), userID, "", false, "", "", 0, 0)
 
 	// then
 	require.Error(t, err)

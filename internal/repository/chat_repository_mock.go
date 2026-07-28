@@ -7,7 +7,6 @@ package repository
 import (
 	"Sixth_world_Sunday/internal/dto"
 	"context"
-	"time"
 
 	"github.com/google/uuid"
 	mock "github.com/stretchr/testify/mock"
@@ -405,74 +404,6 @@ func (_c *MockChatRepository_AddRoomTags_Call) Return(err error) *MockChatReposi
 }
 
 func (_c *MockChatRepository_AddRoomTags_Call) RunAndReturn(run func(ctx context.Context, roomID uuid.UUID, tags []string) error) *MockChatRepository_AddRoomTags_Call {
-	_c.Call.Return(run)
-	return _c
-}
-
-// ArchiveStaleGroupRooms provides a mock function for the type MockChatRepository
-func (_mock *MockChatRepository) ArchiveStaleGroupRooms(ctx context.Context, cutoff time.Time) ([]uuid.UUID, error) {
-	ret := _mock.Called(ctx, cutoff)
-
-	if len(ret) == 0 {
-		panic("no return value specified for ArchiveStaleGroupRooms")
-	}
-
-	var r0 []uuid.UUID
-	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, time.Time) ([]uuid.UUID, error)); ok {
-		return returnFunc(ctx, cutoff)
-	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, time.Time) []uuid.UUID); ok {
-		r0 = returnFunc(ctx, cutoff)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]uuid.UUID)
-		}
-	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, time.Time) error); ok {
-		r1 = returnFunc(ctx, cutoff)
-	} else {
-		r1 = ret.Error(1)
-	}
-	return r0, r1
-}
-
-// MockChatRepository_ArchiveStaleGroupRooms_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'ArchiveStaleGroupRooms'
-type MockChatRepository_ArchiveStaleGroupRooms_Call struct {
-	*mock.Call
-}
-
-// ArchiveStaleGroupRooms is a helper method to define mock.On call
-//   - ctx context.Context
-//   - cutoff time.Time
-func (_e *MockChatRepository_Expecter) ArchiveStaleGroupRooms(ctx any, cutoff any) *MockChatRepository_ArchiveStaleGroupRooms_Call {
-	return &MockChatRepository_ArchiveStaleGroupRooms_Call{Call: _e.mock.On("ArchiveStaleGroupRooms", ctx, cutoff)}
-}
-
-func (_c *MockChatRepository_ArchiveStaleGroupRooms_Call) Run(run func(ctx context.Context, cutoff time.Time)) *MockChatRepository_ArchiveStaleGroupRooms_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 context.Context
-		if args[0] != nil {
-			arg0 = args[0].(context.Context)
-		}
-		var arg1 time.Time
-		if args[1] != nil {
-			arg1 = args[1].(time.Time)
-		}
-		run(
-			arg0,
-			arg1,
-		)
-	})
-	return _c
-}
-
-func (_c *MockChatRepository_ArchiveStaleGroupRooms_Call) Return(uUIDs []uuid.UUID, err error) *MockChatRepository_ArchiveStaleGroupRooms_Call {
-	_c.Call.Return(uUIDs, err)
-	return _c
-}
-
-func (_c *MockChatRepository_ArchiveStaleGroupRooms_Call) RunAndReturn(run func(ctx context.Context, cutoff time.Time) ([]uuid.UUID, error)) *MockChatRepository_ArchiveStaleGroupRooms_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -3366,8 +3297,8 @@ func (_c *MockChatRepository_ListRoomMediaURLs_Call) RunAndReturn(run func(ctx c
 }
 
 // ListUserGroupRooms provides a mock function for the type MockChatRepository
-func (_mock *MockChatRepository) ListUserGroupRooms(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag string, role string, includeArchived bool, limit int, offset int) ([]ChatRoomRow, int, error) {
-	ret := _mock.Called(ctx, userID, search, isRPOnly, tag, role, includeArchived, limit, offset)
+func (_mock *MockChatRepository) ListUserGroupRooms(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag string, role string, limit int, offset int) ([]ChatRoomRow, int, error) {
+	ret := _mock.Called(ctx, userID, search, isRPOnly, tag, role, limit, offset)
 
 	if len(ret) == 0 {
 		panic("no return value specified for ListUserGroupRooms")
@@ -3376,23 +3307,23 @@ func (_mock *MockChatRepository) ListUserGroupRooms(ctx context.Context, userID 
 	var r0 []ChatRoomRow
 	var r1 int
 	var r2 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, uuid.UUID, string, bool, string, string, bool, int, int) ([]ChatRoomRow, int, error)); ok {
-		return returnFunc(ctx, userID, search, isRPOnly, tag, role, includeArchived, limit, offset)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, uuid.UUID, string, bool, string, string, int, int) ([]ChatRoomRow, int, error)); ok {
+		return returnFunc(ctx, userID, search, isRPOnly, tag, role, limit, offset)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, uuid.UUID, string, bool, string, string, bool, int, int) []ChatRoomRow); ok {
-		r0 = returnFunc(ctx, userID, search, isRPOnly, tag, role, includeArchived, limit, offset)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, uuid.UUID, string, bool, string, string, int, int) []ChatRoomRow); ok {
+		r0 = returnFunc(ctx, userID, search, isRPOnly, tag, role, limit, offset)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).([]ChatRoomRow)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, uuid.UUID, string, bool, string, string, bool, int, int) int); ok {
-		r1 = returnFunc(ctx, userID, search, isRPOnly, tag, role, includeArchived, limit, offset)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, uuid.UUID, string, bool, string, string, int, int) int); ok {
+		r1 = returnFunc(ctx, userID, search, isRPOnly, tag, role, limit, offset)
 	} else {
 		r1 = ret.Get(1).(int)
 	}
-	if returnFunc, ok := ret.Get(2).(func(context.Context, uuid.UUID, string, bool, string, string, bool, int, int) error); ok {
-		r2 = returnFunc(ctx, userID, search, isRPOnly, tag, role, includeArchived, limit, offset)
+	if returnFunc, ok := ret.Get(2).(func(context.Context, uuid.UUID, string, bool, string, string, int, int) error); ok {
+		r2 = returnFunc(ctx, userID, search, isRPOnly, tag, role, limit, offset)
 	} else {
 		r2 = ret.Error(2)
 	}
@@ -3411,14 +3342,13 @@ type MockChatRepository_ListUserGroupRooms_Call struct {
 //   - isRPOnly bool
 //   - tag string
 //   - role string
-//   - includeArchived bool
 //   - limit int
 //   - offset int
-func (_e *MockChatRepository_Expecter) ListUserGroupRooms(ctx any, userID any, search any, isRPOnly any, tag any, role any, includeArchived any, limit any, offset any) *MockChatRepository_ListUserGroupRooms_Call {
-	return &MockChatRepository_ListUserGroupRooms_Call{Call: _e.mock.On("ListUserGroupRooms", ctx, userID, search, isRPOnly, tag, role, includeArchived, limit, offset)}
+func (_e *MockChatRepository_Expecter) ListUserGroupRooms(ctx any, userID any, search any, isRPOnly any, tag any, role any, limit any, offset any) *MockChatRepository_ListUserGroupRooms_Call {
+	return &MockChatRepository_ListUserGroupRooms_Call{Call: _e.mock.On("ListUserGroupRooms", ctx, userID, search, isRPOnly, tag, role, limit, offset)}
 }
 
-func (_c *MockChatRepository_ListUserGroupRooms_Call) Run(run func(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag string, role string, includeArchived bool, limit int, offset int)) *MockChatRepository_ListUserGroupRooms_Call {
+func (_c *MockChatRepository_ListUserGroupRooms_Call) Run(run func(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag string, role string, limit int, offset int)) *MockChatRepository_ListUserGroupRooms_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
@@ -3444,17 +3374,13 @@ func (_c *MockChatRepository_ListUserGroupRooms_Call) Run(run func(ctx context.C
 		if args[5] != nil {
 			arg5 = args[5].(string)
 		}
-		var arg6 bool
+		var arg6 int
 		if args[6] != nil {
-			arg6 = args[6].(bool)
+			arg6 = args[6].(int)
 		}
 		var arg7 int
 		if args[7] != nil {
 			arg7 = args[7].(int)
-		}
-		var arg8 int
-		if args[8] != nil {
-			arg8 = args[8].(int)
 		}
 		run(
 			arg0,
@@ -3465,7 +3391,6 @@ func (_c *MockChatRepository_ListUserGroupRooms_Call) Run(run func(ctx context.C
 			arg5,
 			arg6,
 			arg7,
-			arg8,
 		)
 	})
 	return _c
@@ -3476,7 +3401,7 @@ func (_c *MockChatRepository_ListUserGroupRooms_Call) Return(chatRoomRows []Chat
 	return _c
 }
 
-func (_c *MockChatRepository_ListUserGroupRooms_Call) RunAndReturn(run func(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag string, role string, includeArchived bool, limit int, offset int) ([]ChatRoomRow, int, error)) *MockChatRepository_ListUserGroupRooms_Call {
+func (_c *MockChatRepository_ListUserGroupRooms_Call) RunAndReturn(run func(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag string, role string, limit int, offset int) ([]ChatRoomRow, int, error)) *MockChatRepository_ListUserGroupRooms_Call {
 	_c.Call.Return(run)
 	return _c
 }

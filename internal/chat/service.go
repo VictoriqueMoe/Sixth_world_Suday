@@ -29,8 +29,7 @@ type (
 		ReorderChannels(ctx context.Context, categoryID uuid.UUID, roomIDs []uuid.UUID) error
 		ListCategories(ctx context.Context) ([]dto.ChatCategoryResponse, error)
 		ListRooms(ctx context.Context, userID uuid.UUID) (*dto.ChatRoomListResponse, error)
-		ListUserGroupRooms(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag, role string, includeArchived bool, limit, offset int) (*dto.ChatRoomListResponse, error)
-		ArchiveStale(ctx context.Context) (int, error)
+		ListUserGroupRooms(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag, role string, limit, offset int) (*dto.ChatRoomListResponse, error)
 		GetMessages(ctx context.Context, userID, roomID uuid.UUID, limit, offset int) (*dto.ChatMessageListResponse, error)
 		GetMessagesBefore(ctx context.Context, userID, roomID uuid.UUID, before string, limit int) (*dto.ChatMessageListResponse, error)
 

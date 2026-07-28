@@ -253,7 +253,6 @@ func (c *core) rowToResponse(row repository.ChatRoomRow) dto.ChatRoomResponse {
 		HotScore:      row.HotScore,
 		CreatedAt:     row.CreatedAt,
 		LastMessageAt: nullStr(row.LastMessageAt),
-		ArchivedAt:    nullStr(row.ArchivedAt),
 		Unread:        isUnread(row.LastMessageAt, row.LastReadAt),
 	}
 }

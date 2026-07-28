@@ -31,9 +31,6 @@ func registerListeners(settingsSvc settings.Service, app *fiber.App, svc *servic
 	scheduleJob("clean orphaned uploads", "cleaned orphaned upload files", 24*time.Hour, func() (int, error) {
 		return upload.CleanOrphanedFiles(repos.Upload, uploadDir), nil
 	})
-	scheduleJob("archive stale chat rooms", "archived stale chat rooms", time.Hour, func() (int, error) {
-		return svc.chat.ArchiveStale(context.Background())
-	})
 	scheduleJob("reconcile voice presence", "reconciled voice presence", 30*time.Second, func() (int, error) {
 		return svc.chat.ReconcilePresence(context.Background())
 	})

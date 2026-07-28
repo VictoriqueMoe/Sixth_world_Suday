@@ -70,7 +70,6 @@ type (
 		Members           []UserResponse `json:"members"`
 		CreatedAt         string         `json:"created_at"`
 		LastMessageAt     string         `json:"last_message_at,omitempty"`
-		ArchivedAt        string         `json:"archived_at,omitempty"`
 		Unread            bool           `json:"unread"`
 		VoiceCount        int            `json:"voice_count"`
 		VoiceParticipants []uuid.UUID    `json:"voice_participants"`

@@ -350,11 +350,10 @@ func (s *Service) listMyGroupRooms(ctx fiber.Ctx) error {
 	tag := ctx.Query("tag")
 	role := ctx.Query("role")
 	isRPOnly := ctx.Query("rp") == "true"
-	includeArchived := ctx.Query("include_archived") == "true"
 	limit := fiber.Query[int](ctx, "limit", 20)
 	offset := fiber.Query[int](ctx, "offset", 0)
 
-	resp, err := s.ChatService.ListUserGroupRooms(ctx.Context(), userID, search, isRPOnly, tag, role, includeArchived, limit, offset)
+	resp, err := s.ChatService.ListUserGroupRooms(ctx.Context(), userID, search, isRPOnly, tag, role, limit, offset)
 	if err != nil {
 		return utils.InternalError(ctx, "failed to list rooms")
 	}

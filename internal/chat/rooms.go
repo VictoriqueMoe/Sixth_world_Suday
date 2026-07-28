@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"strings"
-	"time"
 
 	"Sixth_world_Sunday/internal/config"
 	"Sixth_world_Sunday/internal/dto"
@@ -154,7 +153,7 @@ func (r *roomsService) ListCategories(ctx context.Context) ([]dto.ChatCategoryRe
 	return cats, nil
 }
 
-func (r *roomsService) ListUserGroupRooms(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag, roleFilter string, includeArchived bool, limit, offset int) (*dto.ChatRoomListResponse, error) {
+func (r *roomsService) ListUserGroupRooms(ctx context.Context, userID uuid.UUID, search string, isRPOnly bool, tag, roleFilter string, limit, offset int) (*dto.ChatRoomListResponse, error) {
 	if limit <= 0 {
 		limit = 20
 	}
@@ -169,7 +168,7 @@ func (r *roomsService) ListUserGroupRooms(ctx context.Context, userID uuid.UUID,
 	}
 
 	tag = strings.ToLower(strings.TrimSpace(tag))
-	rows, total, err := r.chatRepo.ListUserGroupRooms(ctx, userID, search, isRPOnly, tag, roleFilter, includeArchived, limit, offset)
+	rows, total, err := r.chatRepo.ListUserGroupRooms(ctx, userID, search, isRPOnly, tag, roleFilter, limit, offset)
 	if err != nil {
 		return nil, fmt.Errorf("list user group rooms: %w", err)
 	}
@@ -226,15 +225,6 @@ func (r *roomsService) ListRooms(ctx context.Context, userID uuid.UUID) (*dto.Ch
 	}
 
 	return &dto.ChatRoomListResponse{Rooms: rooms, Total: len(rooms)}, nil
-}
-
-func (r *roomsService) ArchiveStale(ctx context.Context) (int, error) {
-	cutoff := time.Now().Add(-7 * 24 * time.Hour)
-	ids, err := r.chatRepo.ArchiveStaleGroupRooms(ctx, cutoff)
-	if err != nil {
-		return 0, fmt.Errorf("archive stale chat rooms: %w", err)
-	}
-	return len(ids), nil
 }
 
 // purgeRoomMessages validates the room (must exist, be a group, and not a system

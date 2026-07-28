@@ -762,7 +762,7 @@ func TestChatRepository_ListUserGroupRooms_Basic(t *testing.T) {
 	require.NoError(t, repos.Chat.AddMemberWithRole(ctx, roomID, user.ID, "host", false))
 
 	// when
-	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "", "", false, 20, 0)
+	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "", "", 20, 0)
 
 	// then
 	require.NoError(t, err)
@@ -784,7 +784,7 @@ func TestChatRepository_ListUserGroupRooms_SearchFilter(t *testing.T) {
 	require.NoError(t, repos.Chat.AddMember(ctx, b, user.ID))
 
 	// when
-	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "Apple", false, "", "", false, 20, 0)
+	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "Apple", false, "", "", 20, 0)
 
 	// then
 	require.NoError(t, err)
@@ -806,7 +806,7 @@ func TestChatRepository_ListUserGroupRooms_RPOnlyFilter(t *testing.T) {
 	require.NoError(t, repos.Chat.AddMember(ctx, rp, user.ID))
 
 	// when
-	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", true, "", "", false, 20, 0)
+	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", true, "", "", 20, 0)
 
 	// then
 	require.NoError(t, err)
@@ -829,7 +829,7 @@ func TestChatRepository_ListUserGroupRooms_TagFilter(t *testing.T) {
 	require.NoError(t, repos.Chat.AddMember(ctx, plain, user.ID))
 
 	// when
-	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "lore", "", false, 20, 0)
+	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "lore", "", 20, 0)
 
 	// then
 	require.NoError(t, err)
@@ -852,7 +852,7 @@ func TestChatRepository_ListUserGroupRooms_HostRoleFilter(t *testing.T) {
 	require.NoError(t, repos.Chat.AddMemberWithRole(ctx, joined, user.ID, "member", false))
 
 	// when
-	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "", "host", false, 20, 0)
+	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "", "host", 20, 0)
 
 	// then
 	require.NoError(t, err)
@@ -875,7 +875,7 @@ func TestChatRepository_ListUserGroupRooms_MemberRoleFilter(t *testing.T) {
 	require.NoError(t, repos.Chat.AddMemberWithRole(ctx, joined, user.ID, "member", false))
 
 	// when
-	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "", "member", false, 20, 0)
+	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "", "member", 20, 0)
 
 	// then
 	require.NoError(t, err)
@@ -896,7 +896,7 @@ func TestChatRepository_ListUserGroupRooms_Pagination(t *testing.T) {
 	}
 
 	// when
-	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "", "", false, 2, 0)
+	rooms, total, err := repos.Chat.ListUserGroupRooms(ctx, user.ID, "", false, "", "", 2, 0)
 
 	// then
 	require.NoError(t, err)

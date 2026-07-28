@@ -190,7 +190,7 @@ func TestListMyGroupRooms_OK(t *testing.T) {
 	h, chatMock := newChatHarness(t)
 	userID := uuid.New()
 	h.ExpectValidSession("valid-cookie", userID)
-	chatMock.EXPECT().ListUserGroupRooms(mock.Anything, userID, "foo", true, "tag", "admin", false, 10, 5).
+	chatMock.EXPECT().ListUserGroupRooms(mock.Anything, userID, "foo", true, "tag", "admin", 10, 5).
 		Return(&dto.ChatRoomListResponse{}, nil)
 
 	// when
@@ -206,7 +206,7 @@ func TestListMyGroupRooms_InternalError(t *testing.T) {
 	h, chatMock := newChatHarness(t)
 	userID := uuid.New()
 	h.ExpectValidSession("valid-cookie", userID)
-	chatMock.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "", "", false, 20, 0).
+	chatMock.EXPECT().ListUserGroupRooms(mock.Anything, userID, "", false, "", "", 20, 0).
 		Return(nil, errors.New("boom"))
 
 	// when
